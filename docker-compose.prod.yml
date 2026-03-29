@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  rpa-chatbot:
+    image: ${REGISTRY:-ghcr.io}/${IMAGE_NAME:-your_github_username/chatbot_rpa}:latest
+    container_name: rpa-chatbot-prod
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - chroma-data:/app/chroma_db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  chroma-data:
+    name: rpa-chatbot-chroma-data
