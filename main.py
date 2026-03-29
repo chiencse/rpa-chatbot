@@ -27,3 +27,7 @@ app.include_router(chat_router, prefix="/api/v1")
 @app.get("/")
 def read_root():
     return {"status": "RPA Copilot API is running"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
